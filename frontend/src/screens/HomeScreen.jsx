@@ -5,7 +5,7 @@ import data from "../data";
 const HomeScreen = () => {
     return (
         <div className="row center">
-            {data.map((p) => {
+            {data.products.map((p) => {
               return (
                 <Product p={p} key={p._id}/>
               )
@@ -14,4 +14,4 @@ const HomeScreen = () => {
     )
 }
 
-export default HomeScreen
+export default HomeScreen;
