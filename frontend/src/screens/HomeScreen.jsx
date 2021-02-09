@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect, } from 'react';
+// import Axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
 import Product from '../components/Product';
-import data from "../data";
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { listProducts } from '../actions/productAction';
 
 const HomeScreen = () => {
+  const productList = useSelector(state => state.productList);
+  const {loading, products, error} = productList;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(listProducts())
+
+  }, [dispatch])
     return (
+      <>
+      {loading ? <LoadingBox /> : error ? <MessageBox error={error}/> :
         <div className="row center">
-            {data.products.map((p) => {
+            {products.map((p) => {
               return (
                 <Product p={p} key={p._id}/>
               )
             })}
-            </div>
+        </div> }
+      </>
     )
 }
 
